@@ -3,6 +3,6 @@
 {% load bootstrap3 %}
 
 {% block content %}
-<h1 style="text-align: center; "> {{ article.title }} </h1>
+{{ article.title }}
 {{ article.content | safe | escape }}
 {% endblock %}

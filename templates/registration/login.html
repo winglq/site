@@ -1,15 +1,21 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load staticfiles %}
 
+{% block header %}
+   <link href={% static "signin.css" %} rel="stylesheet">
+{% endblock %}
 {% block content %}
-<form method="post" action=".">
+<div class="container">
+<form method="post" action="." class="form-signin">
   {% csrf_token %} 
   {% bootstrap_form form %}
-  <input type="submit" value="{% trans 'Log in' %}" />
+  <button class="btn btn-lg btn-primary btn-block" type="submit"> {% trans 'Log in' %}</button>
   <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
-<p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
-<p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+<p class="form-p">{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
+<p class="form-p">{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+</div>
 {% endblock %}

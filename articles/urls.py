@@ -14,16 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib import admin
-from home.views import index
-from django.conf.urls.static import static
-from django.conf import settings
+from views import create, detail, list
 
 urlpatterns = [
-    url(r'^$', index, name='index'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('users.urls')),
-    url(r'^summernote/', include('django_summernote.urls')),
-    url(r'^articles/', include('articles.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
-static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^create/$', create,
+        name='article_create'),
+    url(r'^detail/([0-9]{0,10})/$', detail, name='article_detail'),
+    url(r'^list/$', list, name='article_list'),
+]

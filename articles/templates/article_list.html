@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+{% for article in articles %}
+<h5> <a href={% url 'article_detail' article.id %}> {{ article.title }} </a></h5>
+{% endfor %}
+{% endblock %}

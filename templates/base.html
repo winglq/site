@@ -3,40 +3,79 @@
 {% load bootstrap3 %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+{% block header %}
+    <link href={% static 'style.css' %} rel="stylesheet">
     <title>{% block title %}User test{% endblock %}</title>
+{% endblock %}
 </head>
 
 <body>
+  {% block menu %}
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-    <div id="header">
-    {% block header %}
-    <a href="{% url 'index' %}">{% trans "Home" %}</a> | 
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapse" data-toggle="collapse" data-target="#navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Logo</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav">
+          <li>        
+            <a href="{% url 'index' %}">{% trans "Home" %}</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Articles" %}<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li>        
+                <a href="{% url 'article_create' %}">{% trans "New" %}</a>
+              </li>
+              <li>        
+                <a href="{% url 'article_list' %}">{% trans "All" %}</a>
+              </li>
 
-    {% if user.is_authenticated %}
-        {% trans "Logged in" %}: {{ user.username }} 
-        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> | 
-        <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>)
-    {% else %}
-       <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
-    {% endif %}
-    <hr />
-    {% endblock %}
+            </ul>
+          </li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ user.email }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a></li>
+                  <li><a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a></li>
+                </ul>
+              </li>
+          {% else %}
+              <li><a href="{% url 'auth_login' %}">{% trans "Log in" %}</a></li> 
+          {% endif %}
+        </ul>
+      </div>
     </div>
+  </nav>
+  {% endblock %}
 
-    <div id="content">
+  <div id="content"  class="container">
     {% block content %}{% endblock %}
-    </div>
+  </div>
 
-    <div id="footer">
-    {% block footer %}
-        <hr />
-    {% endblock %}
-    </div>
-    </div>
+  <footer class="footer">
+  <div class="container">
+  {% block footer %}
+    <hr />
+    <p>about|powered by Liu Qing</p>
+  {% endblock %}
+  </div>
+  </footer>
+  
 </body>
 
 </html>
