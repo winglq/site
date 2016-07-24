@@ -5,8 +5,7 @@
 {% block content %}
 <form method="post" action="." class="form-signin">
   {% csrf_token %}
-
   {% bootstrap_form form %}
-<button class="btn btn-lg btn-primary btn-block" type="submit">{% trans 'Submit' %}</button>
+<div class="col-md-12 form-group text-right"><button class="btn btn-primary" type="submit">{% trans 'Submit' %}</button></div>
 </form>
 {% endblock %}

@@ -1,2 +1,5 @@
 *.pyc
 *.sqlite3
+*/migrations/*
+*.swp
+files/*

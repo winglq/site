@@ -3,6 +3,34 @@
 {% load bootstrap3 %}
 
 {% block content %}
-{{ article.title }}
-{{ article.content | safe | escape }}
+
+  <h4>{{ article.title }} </h4>
+  <a href={% url "article_update" article.id %}>
+  <span class="glyphicon glyphicon-pencil" >{% trans "Edit" %}</span>
+  </a>
+  <p> {% trans "Tags" %}: 
+  {% for tag in article_tags %} 
+    <a href={% url "tag_show" tag.id %}>{{ tag.name }} </a>
+  {% endfor %}
+  </p>
+  {{ article.content | safe | escape }}
+  <hr /> 
+  <ul id="comments" class="comments">
+    {% for comment in comments %}
+      <li class="comment">
+        <div class="clearfix">
+                <h4 class="pull-left"> {{ comment.name }} {% if comment.email %} ({{ comment.email }}) {% endif %}  </h4>
+        </div>
+           <p>
+           {{ comment.content }}
+           </p>
+      </li>
+    {% endfor %}
+  </ul>
+  <hr />
+  <div class="well">
+    <h4> {% trans "Leave a comment" %} </h4>
+    {% include "comment_create.html" %}
+  </div>
+
 {% endblock %}

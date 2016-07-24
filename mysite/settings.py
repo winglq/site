@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'articles',
     'admineditor',
     'home',
+    'comments',
+    'tags',
+    'sidebar',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -136,3 +139,8 @@ STATICFILES_DIRS = (
         )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
 MEDIA_URL = '/medias/'
+
+SUMMERNOTE_CONFIG = {
+    'width': '100%',
+    'height': '480',
+    }

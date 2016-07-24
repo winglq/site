@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('users.urls')),
     url(r'^summernote/', include('django_summernote.urls')),
+    url(r'^tags/', include('tags.urls')),
     url(r'^articles/', include('articles.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
 static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
