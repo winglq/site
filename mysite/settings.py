@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'comments',
     'tags',
     'sidebar',
+    'register',
 ]
 
 MIDDLEWARE_CLASSES = [

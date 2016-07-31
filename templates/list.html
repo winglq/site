@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<table class='table'>
+{% for form in forms %}
+<tr>
+    {% for  k, v in form.list.items %}
+    <td>{{ v }}</td>
+    {% endfor %}
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% load bootstrap3 %}
+{% load i18n %}
+
+<form method="post" action="." class="clearfix">
+  {% csrf_token %}
+  {% bootstrap_field form.name required_css_class='col-md-6' %}
+  {% bootstrap_field form.email required_css_class='col-md-6' %}
+  {% bootstrap_field form.content required_css_class='col-md-12' %}
+  <div class="col-md-12 form-group text-right"><button class="btn btn-primary" type="submit">{% trans 'Submit' %}</button></div>
+</form>

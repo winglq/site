@@ -1,0 +1,16 @@
+{% load bootstrap3 %}
+{% load i18n %}
+
+<div class="panel panel-default">
+        <div class="panel-heading">
+                <h4>{% trans "Tags" %}</h4>
+        </div>
+        <div class="panel-body">
+                <ul class="list-inline">
+                        {% for tag in tags %}
+                        <li><a href={% url "tag_show" tag.id %}>{{ tag.name }}</a></li>
+                        {% endfor %}
+                </ul>
+        </div>
+</div>
+

@@ -1,0 +1,4 @@
+Django==1.9.7
+django-bootstrap3==7.0.1
+django-registration==2.1.2
+django-summernote==0.8.5

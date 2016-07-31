@@ -14,18 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib import admin
-from home.views import index
-from django.conf.urls.static import static
-from django.conf import settings
-
+from views import create, new, list_registerred, list
 urlpatterns = [
-    url(r'^$', index, name='index'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('users.urls')),
-    url(r'^register/', include('register.urls')),
-    url(r'^summernote/', include('django_summernote.urls')),
-    url(r'^tags/', include('tags.urls')),
-    url(r'^articles/', include('articles.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
-static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^create/$', create,
+        name='register_create'),
+    url(r'^new/([0-9a-f]{32})/$', new, name='register_new'),
+    url(r'^list/([0-9a-f]{32})/$', list_registerred, name='register_list'),
+    url(r'^list/$', list, name='register_list_meta'),
+]

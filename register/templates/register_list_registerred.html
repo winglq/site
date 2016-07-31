@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+{% for result in results %}
+   {% for k,v in result.items %}
+   <h5>
+   {{ k }}: {{ v }}
+   </h5>
+   <hr\>
+   {% endfor %}
+{% endfor %}
+{% endblock %}
