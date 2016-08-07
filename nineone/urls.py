@@ -14,19 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib import admin
-from home.views import index
-from django.conf.urls.static import static
-from django.conf import settings
+from views import test, start_download
+from views import NineoneVideoListView, NineoneVideoDetailView
 
 urlpatterns = [
-    url(r'^$', index, name='index'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('users.urls')),
-    url(r'^register/', include('register.urls')),
-    url(r'^summernote/', include('django_summernote.urls')),
-    url(r'^tags/', include('tags.urls')),
-    url(r'^articles/', include('articles.urls')),
-    url(r'^nineone/', include('nineone.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
-static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^test/$', test,
+        name='nineone_test'),
+    url(r'^sdownload/$', start_download,
+        name="sdownload"),
+    url(r'^list/$', NineoneVideoListView.as_view(),
+        name='nineone_list'),
+    url(r'^detail/(?P<pk>[0-9]+)$', NineoneVideoDetailView.as_view(),
+        name="nineone_detail"),
+]

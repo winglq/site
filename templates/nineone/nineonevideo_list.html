@@ -7,7 +7,7 @@
 <table class='table'>
 {% for obj in object_list %}
 <tr>
-    <td>{{ obj.title }}</td>
+        <td><a href={% url 'nineone_detail' obj.id %} > {{ obj.title }}</a></td>
 </tr>
 {% endfor %}
 </table>
