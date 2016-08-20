@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<h1> Your ticket is:</h1>
+<h1><a href={% url 'check_ticket' ticket.ticket %}>{{ ticket.ticket }}</a></h1>
+
+{% endblock %}

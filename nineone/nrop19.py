@@ -8,6 +8,7 @@ import re
 import urllib2
 import logging
 from bs4 import BeautifulSoup
+import subprocess
 
 
 logger = logging.getLogger(__name__)
@@ -62,7 +63,7 @@ class nrop19(object):
         resp = ss.get(url, stream=True)
         total_downloaded = 0
         flush = 64
-        logger.info('start to download %s to %s', (url, file_path))
+        logger.info('start to download %s to %s', url, file_path)
         with open(file_path, 'w') as f:
             for chunk in resp.iter_content(chunk_size=4096):
                 if chunk:
@@ -74,6 +75,19 @@ class nrop19(object):
                         sys.stdout.flush()
                         flush = 64
         logger.info("%s download completed", file_path)
+
+    def download_video2(self, url, file_path):
+        logger.info('start to download %s to %s', url, file_path)
+        cookies = '; '.join(
+            ['%s=%s' % (i, ii) for i, ii in ss.cookies.items()])
+
+        cmd = 'wget -c -O "%s" --header "User-Agent: %s" ' \
+            '--header "Cookie: %s" "%s"' \
+            % (file_path, headers['User-Agent'], cookies, url)
+
+        subprocess.check_call(cmd, shell=True)
+        logger.info("%s download completed", file_path)
+
 
     def get_all_video_info_from_url(self, url):
         resp = ss.get(url)

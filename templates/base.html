@@ -55,6 +55,24 @@
 
             </ul>
           </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "NineOne" %}<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+
+          <li>
+            <a href="{% url 'nineone_list' %}">{% trans "All Video" %}</a>
+          </li>
+          <li>
+            <a href="{% url 'list_ticket' %}">{% trans "AvailableTickets" %}</a>
+          </li>
+          <li>
+            <a href="{% url 'generate_ticket' %}">{% trans "GenerateTicket" %}</a>
+          </li>
+          <li>
+            <a href="{% url 'list_all_ticket' %}">{% trans "AllTicket" %}</a>
+          </li>
+            </ul>
+          </li>
 
 
         </ul>

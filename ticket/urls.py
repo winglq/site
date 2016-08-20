@@ -14,20 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib import admin
-from home.views import index
-from django.conf.urls.static import static
-from django.conf import settings
+from views import generate, TicketListView, check
+from views import  TicketListAvailableView, check
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    url(r'^$', index, name='index'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('users.urls')),
-    url(r'^register/', include('register.urls')),
-    url(r'^summernote/', include('django_summernote.urls')),
-    url(r'^tags/', include('tags.urls')),
-    url(r'^articles/', include('articles.urls')),
-    url(r'^nineone/', include('nineone.urls')),
-    url(r'^ticket/', include('ticket.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
-static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^gen/$', generate,
+        name='generate_ticket'),
+    url(r'^list/$', TicketListAvailableView.as_view(),
+        name="list_ticket"),
+    url(r'^check/([0-9\-a-f]{36})$', check,
+        name='check_ticket'),
+    url(r'^check/(?P<next>/.*)$', check,
+        name='check_ticket'),
+    url(r'^check/$', check,
+        name='check_ticket'),
+    url(r'^list_all/$', login_required(TicketListView.as_view()),
+        name='list_all_ticket')
+]

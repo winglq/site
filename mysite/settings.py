@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'sidebar',
     'register',
     'nineone',
+    'ticket'
 ]
 
 MIDDLEWARE_CLASSES = [

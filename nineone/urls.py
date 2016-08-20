@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from views import test, start_download
 from views import NineoneVideoListView, NineoneVideoDetailView
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     url(r'^test/$', test,

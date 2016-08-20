@@ -4,9 +4,11 @@
 
 {% block content %}
 <h1> {{ object.title }} </h1>
-<video src='/medias/{{ object.filename }}' controls="controls">
-        your browser does not support the video tag
+<div align="center" class="embed-responsive embed-responsive-16by9">
+<video controls class="embed-responsive-item">
+        <source src='/medias/{{ object.filename }}' type="video/mp4"> 
+        Your browser does not support HTML5 video.
 </video>
-
-
+</div>
+<p><a href='/medias/{{ object.filename }}'> Download Video </a></p>
 {% endblock %}
