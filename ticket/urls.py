@@ -14,20 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from views import generate, TicketListView, check
-from views import  TicketListAvailableView, check
+from views import TicketListView
+from views import CheckTicketView
+from views import  TicketListAvailableView 
+from views import GenerateTicketView
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    url(r'^gen/$', generate,
+    url(r'^gen/$', login_required(GenerateTicketView.as_view()),
         name='generate_ticket'),
     url(r'^list/$', TicketListAvailableView.as_view(),
         name="list_ticket"),
-    url(r'^check/([0-9\-a-f]{36})$', check,
+    url(r'^check/([0-9\-a-f]{36})$', CheckTicketView.as_view(),
         name='check_ticket'),
-    url(r'^check/(?P<next>/.*)$', check,
+    url(r'^check/(?P<next>/.*)$', CheckTicketView.as_view(),
         name='check_ticket'),
-    url(r'^check/$', check,
+    url(r'^check/$', CheckTicketView.as_view(),
         name='check_ticket'),
     url(r'^list_all/$', login_required(TicketListView.as_view()),
         name='list_all_ticket')

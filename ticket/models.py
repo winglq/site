@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Ticket(models.Model):
-    ticket = models.UUIDField(primary_key=True)
+    id = models.AutoField(primary_key=True)
+    ticket = models.UUIDField()
     ip = models.GenericIPAddressField()
-    expired = models.BooleanField()
 

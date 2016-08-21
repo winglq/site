@@ -1,0 +1,3 @@
+[submodule "django-sendfile"]
+	path = django-sendfile
+	url = https://github.com/johnsensible/django-sendfile.git

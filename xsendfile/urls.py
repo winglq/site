@@ -14,16 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from views import VideoDownloadView
-from views import NineoneVideoListView, NineoneVideoDetailView
-from django.contrib.auth.decorators import login_required
+from views import xsendfile
 
 urlpatterns = [
-    url(r'^sdownload/$',
-        login_required(VideoDownloadView.as_view()),
-        name="sdownload"),
-    url(r'^list/$', NineoneVideoListView.as_view(),
-        name='nineone_list'),
-    url(r'^detail/(?P<pk>[0-9]+)$', NineoneVideoDetailView.as_view(),
-        name="nineone_detail"),
+    url(r'^(.*)$', xsendfile,
+        name='xsendfile'),
 ]

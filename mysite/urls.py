@@ -13,11 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import url, include, handler404
+from django.conf.urls import handler500
 from django.contrib import admin
 from home.views import index
 from django.conf.urls.static import static
 from django.conf import settings
+
+handler404 = 'mysite.views.handler404'
+handler500 = 'mysite.views.handler500'
 
 urlpatterns = [
     url(r'^$', index, name='index'),
@@ -29,5 +33,7 @@ urlpatterns = [
     url(r'^articles/', include('articles.urls')),
     url(r'^nineone/', include('nineone.urls')),
     url(r'^ticket/', include('ticket.urls')),
+    url(r'^%s/' % settings.XSENDFILE_URL.strip('/'),
+        include('xsendfile.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
 static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

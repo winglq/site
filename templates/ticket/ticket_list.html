@@ -8,14 +8,12 @@
 <thead>
         <td>Ticket</td>
         <td>IP</td>
-        <td>Is Expired</td>
 </thead>
 <tbody>
 {% for obj in object_list %}
 <tr>
         <td><a href={% url 'check_ticket' obj.ticket %}>{{ obj.ticket }}</a></td>
         <td>{{ obj.ip }}</td>
-        <td>{{ obj.expired }}</td>
 </tr>
 {% endfor %}
 </tbody>

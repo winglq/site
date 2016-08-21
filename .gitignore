@@ -1,5 +1,8 @@
 *.pyc
-*.sqlite3
+db.sqlite3
 */migrations/*
 *.swp
 files/*
+logs
+*.mp4
+*.jpg

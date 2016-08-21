@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ii_pf(idje63i5o4ug=gamk1+4ayw=9169e_q&d89f=9cl_tnb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -141,6 +141,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
         )
+STATIC_ROOT = '/home/qing/http/static'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
 MEDIA_URL = '/medias/'
 
@@ -164,3 +165,7 @@ LOGGING = {
         },
     },
 }
+
+XSENDFILE_ROOT =os.path.join(BASE_DIR, 'protected_files')
+XSENDFILE_URL = '/protected'
+XSENDFILE_NGINX_URL = '/protect'
