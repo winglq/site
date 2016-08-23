@@ -71,7 +71,7 @@ class InternalErrorView(TemplateView):
     template_name = '500.html'
 
     def get(self, *args, **kwargs):
-        response = super(PageNotFindView, self).get(*args, **kwargs)
+        response = super(InternalErrorView, self).get(*args, **kwargs)
         response.status_code = 500
         return response
 

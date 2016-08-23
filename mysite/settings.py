@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ii_pf(idje63i5o4ug=gamk1+4ayw=9169e_q&d89f=9cl_tnb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'sidebar',
     'register',
     'nineone',
-    'ticket'
+    'ticket',
+    'kombu.transport.django'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -169,3 +170,8 @@ LOGGING = {
 XSENDFILE_ROOT =os.path.join(BASE_DIR, 'protected_files')
 XSENDFILE_URL = '/protected'
 XSENDFILE_NGINX_URL = '/protect'
+
+BROKER_URL = 'django://'
+CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+CELERY_TASK_SERIALIZER = 'json'
+
