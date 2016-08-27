@@ -174,4 +174,3 @@ XSENDFILE_NGINX_URL = '/protect'
 BROKER_URL = 'django://'
 CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 CELERY_TASK_SERIALIZER = 'json'
-

@@ -46,3 +46,7 @@ code {
 #comments li {
   list-style: none;
 }
+
+.home_head {
+        padding: 80px 120px;
+}

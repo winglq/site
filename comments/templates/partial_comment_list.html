@@ -1,0 +1,13 @@
+<ul id="comments" class="comments">
+  {% for comment in object_list%}
+    <li class="comment">
+      <div class="clearfix">
+              <h4 class="pull-left"> {{ comment.name }} {% if comment.email %} ({{ comment.email }}) {% endif %}  </h4>
+      </div>
+         <p>
+         {{ comment.content }}
+         </p>
+    </li>
+  {% endfor %}
+</ul>
+

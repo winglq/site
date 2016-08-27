@@ -2,7 +2,9 @@ from tags.models import Tag
 from django.shortcuts import render
 from django.views.generic import ListView as ListViewBase
 from django.views.generic import DetailView as DetailViewBase
+from django.views.generic import CreateView as CreateViewBase
 from django.views.generic.edit import FormView as FormViewBase
+from django.views.generic import UpdateView as UpdateViewBase
 from django.views.generic.base import TemplateView as TemplateViewBase
 from django.views.generic.base import View as DjangoViewBase
 
@@ -56,6 +58,16 @@ class FormView(FormViewBase):
 
 @TagWrapper()
 class TemplateView(TemplateViewBase):
+    pass
+
+
+@TagWrapper()
+class UpdateView(UpdateViewBase):
+    pass
+
+
+@TagWrapper()
+class CreateView(CreateViewBase):
     pass
 
 class PageNotFindView(TemplateView):

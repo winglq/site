@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include, handler404
 from django.conf.urls import handler500
 from django.contrib import admin
-from home.views import index
+from home.views import index, IndexView
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -24,7 +24,7 @@ handler404 = 'mysite.views.handler404'
 handler500 = 'mysite.views.handler500'
 
 urlpatterns = [
-    url(r'^$', index, name='index'),
+    url(r'^$', IndexView.as_view(), name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('users.urls')),
     url(r'^register/', include('register.urls')),

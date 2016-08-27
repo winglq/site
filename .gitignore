@@ -6,3 +6,4 @@ files/*
 logs
 *.mp4
 *.jpg
+protected_files/*

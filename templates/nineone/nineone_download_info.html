@@ -6,16 +6,14 @@
 
 <table class='table'>
 <tr>
-        <th>Ticket</th>
-        <th>IP</th>
+                <th>name</th>
+                <th>status</th>
 </tr>
-<tbody>
 {% for obj in object_list %}
 <tr>
-        <td><a href={% url 'check_ticket' obj.ticket %}>{{ obj.ticket }}</a></td>
-        <td>{{ obj.ip }}</td>
+        <td>{{ obj.name }}</td>
+        <td>{{ obj.status }}</td>
 </tr>
 {% endfor %}
-</tbody>
 </table>
 {% endblock %}

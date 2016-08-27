@@ -20,9 +20,12 @@ class NineoneVideo(models.Model):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        ordering = ['-ctime']
+
 @receiver(post_delete, sender=NineoneVideo)
 def delete_video_file(sender, instance, **kwargs):
-    f = os.path.join(settings.MEDIA_ROOT, instance.filename)
+    f = os.path.join(settings.XSENDFILE_ROOT, instance.filename)
     os.remove(f)
     logger.info("%s deleted", f)
 

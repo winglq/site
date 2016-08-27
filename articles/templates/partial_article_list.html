@@ -1,0 +1,11 @@
+{% load i18n %}
+  <table class='table'>
+{% for obj in object_list %}
+          <tr>
+          <td><a href={% url 'article_detail' obj.id %}> {{ obj.title }} </a></td>
+          <td><a href={% url "article_update" obj.id %} >
+    <span class="glyphicon glyphicon-pencil" ></span></td>
+  </a>
+           </tr>
+{% endfor %}
+  </table>

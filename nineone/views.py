@@ -9,7 +9,7 @@ import requests
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from ticket.views import CheckTicketView
-from tasks import download_and_save
+from tasks import download_and_save, VideoInfo
 
 logger = logging.getLogger(__name__)
 # Create your views here.
@@ -42,6 +42,12 @@ class NineoneVideoDetailView(DetailView):
             request, *args, **kwargs)
 
 class VideoDownloadView(TemplateView):
+    template_name = 'nineone/nineone_download_info.html'
+
     def get(self, request, *args, **kwargs):
-        download_and_save.delay()
-        return redirect('/nineone/list')
+        download_and_save()
+        context = super(VideoDownloadView, self). \
+            get_context_data(**kwargs)
+        vinfo = VideoInfo()
+        context['object_list'] = vinfo.get_obj_list()
+        return self.render_to_response(context)

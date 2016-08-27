@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% load article_tags %}
+
+{% block highlight %}
+<div class="text-center home_head">
+             <h3>HOME</h3>
+             <p><em>Welcome to Qing's Playground</em></p>
+</div>
+<br/>
+{% endblock %}
+
+{% block content %}
+{% show_article_list %}
+{% endblock %}

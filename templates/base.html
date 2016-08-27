@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <link href="{% static 'bootstrap-3.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <script src="{% static 'jquery/1.12.4/jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap-3.3.6-dist/js/bootstrap.min.js' %}"></script>
@@ -103,6 +102,11 @@
   {% endblock %}
 
   <div id="content"  class="container">
+    <div class="row">
+            <div class="col-sm-12">
+                    {% block highlight %}{%endblock%}
+            </div>
+     </div>
     <div class="row">
     <div class="col-md-8">
     {% block content %}{% endblock %}

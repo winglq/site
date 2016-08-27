@@ -1,5 +1,5 @@
 from models import HomeArticle
-from mysite.views import ViewBase
+from mysite.views import ViewBase, TemplateView
 # Create your views here.
 class HomeView(ViewBase):
     def index(self, request):
@@ -8,3 +8,6 @@ class HomeView(ViewBase):
 def index(request):
     hv = HomeView()
     return hv.index(request)
+
+class IndexView(TemplateView):
+    template_name = 'index2.html' 
