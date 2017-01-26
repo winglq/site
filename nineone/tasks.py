@@ -63,10 +63,14 @@ def download_single(title, video_url, filename):
 
 
 def download_and_save():
+    logging.debug("enter download_and_save")
     vinfo = VideoInfo()
+    infos = n.get_all_video_info_from_url("http://68.235.35.99/v.php?category=tf&viewtype=basic")
+    #infos = n.get_all_video_info_from_url("http://68.235.35.99/v.php?category=top&m=-1&viewtype=basic")
+    #infos = n.get_all_video_info_from_url("http://email.91dizhi.at.gmail.com.7h4.space/v.php?category=tf&viewtype=basic")
     #infos = n.get_all_video_info_from_url("http://sh.k7p.work/v.php?category=tf&viewtype=basic")
     #infos = n.get_all_video_info_from_url("http://sh.k7p.work/v.php?category=top&m=-1&viewtype=basic")
-    infos = n.get_all_video_info_from_url("http://sh.k7p.work/v.php?category=mf&viewtype=basic&page=3")
+    #infos = n.get_all_video_info_from_url("http://sh.k7p.work/v.php?category=mf&viewtype=basic&page=2")
     for info in infos:
         if info['title'] not in vinfo.videos:
             vinfo.update(info['title'], 'waiting')

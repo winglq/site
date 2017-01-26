@@ -8,6 +8,7 @@ GROUP=qing
 NUM_WORKERS=3                                     # how many worker processes should Gunicorn spawn
 DJANGO_SETTINGS_MODULE=mysite.settings             # which settings file should Django use
 DJANGO_WSGI_MODULE=mysite.wsgi                     # WSGI module name
+TIMEOUT=120
 
 echo "Starting $NAME as `whoami`"
 
@@ -29,4 +30,5 @@ exec ../bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --user=$USER --group=$GROUP \
   --bind=unix:$SOCKFILE \
   --log-level=debug \
+  --timeout $TIMEOUT \
   --log-file=-

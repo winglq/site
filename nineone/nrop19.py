@@ -14,21 +14,32 @@ import subprocess
 logger = logging.getLogger(__name__)
 
 headers = {
-    "Accept":"text/html,application/xhtml+xml,application/xml; " \
-        "q=0.9,image/webp,*/*;q=0.8",
     "Accept-Encoding":"text/html",
-    "Accept-Language":"q=0.8,zh-CN;en-US,en;q=0.6,zh;q=0.4,zh-TW;q=0.2",
-    "Content-Type":"application/x-www-form-urlencoded",
-    "User-Agent":"Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 " \
-        "(KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36"
+    "Accept-Language":"en-US,en;zh-CN, zh; q=0.8",
+    "Accept":"*/*",
+    "User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36",
+    "Connection": "keep-alive",
 }
 
 ss = requests.session()
 ss.headers.update(headers)
 
 class nrop19(object):
+    def get_resp_by_wget(self, url):
+        cmd = 'wget -c -O "%s"  "%s"' \
+            % ('/tmp/tmp.html', url)
+        subprocess.check_call(cmd, shell=True)
+        with open('/tmp/tmp.html', 'r') as f:
+            cnt = f.read()
+        class resp(object):
+            def __init__(self, cnt):
+                self.content=cnt
+                self.ok = True
+        return resp(cnt)
+
     def get_video_url(self, url):
         resp = ss.get(url)
+        #resp = self.get_resp_by_wget(url)
         if resp.ok:
             n1 = re.search(r'so.addVariable\(\'file\',\'(\d+)\'', resp.content)
             n2 = re.search(r'so.addVariable\(\'seccode\',\'(.+?)\'', resp.content)
@@ -37,7 +48,7 @@ class nrop19(object):
             if n1 and n2 and n3:
                 apiurl = 'http://%s/getfile.php' \
                     % urlparse.urlparse(url).hostname
-                logger.debug("apiurl: %s", apiurl)
+                logger.info("apiurl: %s", apiurl)
 
                 params = {
                     'VID': n1.group(1),
@@ -46,6 +57,11 @@ class nrop19(object):
                     'max_vid': n3.group(1),
                 }
                 logger.debug("params: %s", params)
+                ss.headers.update({"Referer": url, "X-Requested-With": "ShockwaveFlash/24.0.0.194"})
+                import eventlet
+                eventlet.sleep(20)
+                logging.debug(ss.cookies)
+                logging.debug(ss.headers)
 
                 resp = ss.get(apiurl, params=params)
                 if resp.ok:
@@ -57,7 +73,9 @@ class nrop19(object):
                 else:
                     raise Exception("get api url fail")
             else:
-                raise Exception("get url %s failed", url)
+                raise Exception("pattern not found at %s" % url)
+        else:
+            raise Exception("get url %s failed" % url)
 
     def download_video(self, url, file_path):
         resp = ss.get(url, stream=True)
@@ -111,4 +129,10 @@ class nrop19(object):
                     logger.debug("new video info %s", info)
         return infos
 
+
+if __name__ == "__main__":
+    FORMAT = '%(asctime)-15s %(message)s'
+    logging.basicConfig(format=FORMAT, level=logging.DEBUG)
+    none = nrop19()
+    print none.get_video_url("http://68.235.35.99/view_video.php?viewkey=0bbb1e9ebc00f06ae397&page=1&viewtype=basic&category=tf")
 

@@ -45,6 +45,7 @@ class VideoDownloadView(TemplateView):
     template_name = 'nineone/nineone_download_info.html'
 
     def get(self, request, *args, **kwargs):
+        logging.debug("enter: VideoDownloadView.get")
         download_and_save()
         context = super(VideoDownloadView, self). \
             get_context_data(**kwargs)

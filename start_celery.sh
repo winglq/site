@@ -1,1 +1,1 @@
-celery -A mysite worker -l info --concurrency=3
+celery -A mysite worker -l debug --concurrency=3 -P eventlet

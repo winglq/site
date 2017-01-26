@@ -8,6 +8,10 @@ django-bootstrap3==7.0.1
 django-registration==2.1.2
 django-sendfile==0.3.10
 django-summernote==0.8.5
+enum-compat==0.0.2
+enum34==1.1.6
+eventlet==0.20.1
+greenlet==0.4.11
 gunicorn==19.6.0
 jedi==0.9.0
 kombu==3.0.35
