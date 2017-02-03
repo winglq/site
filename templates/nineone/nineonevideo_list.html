@@ -1,14 +1,54 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load favor_tags %}
+{% load site_tags%}
 
 {% block content %}
+{% if is_paginated %}
+  <div class="pagination">
+          <ul class="pager">
+                  {% if page_obj.has_previous %}
+                  <li><a href="/nineone/list?{% url_replace page=page_obj.previous_page_number %}">previous</a></li>
+                  {% endif %}
+                  <li>
+                          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                  </li>
+                  {% if page_obj.has_next %}
+                  <li><a href="/nineone/list?{% url_replace page=page_obj.next_page_number %}">next</a></li>
+                  {% endif %}
+          </ul>
+  </div>
+{% endif %}
 
 <table class='table'>
+<thead>
+<tr>
+        <td><a href={% url 'nineone_list' %}?orderby=title>Title</a></td>
+        <td><a href={% url 'nineone_list' %}?orderby=_favor__order_count>Favor</a></td>
+</tr>
+</thead>
 {% for obj in object_list %}
 <tr>
         <td><a href={% url 'nineone_detail' obj.id %} > {{ obj.title }}</a></td>
+        <td> {% show_favor obj.favor %} </td>
 </tr>
 {% endfor %}
 </table>
+
+{% if is_paginated %}
+  <div class="pagination">
+          <ul class="pager">
+                  {% if page_obj.has_previous %}
+                  <li><a href="/nineone/list?{% url_replace page=page_obj.previous_page_number %}">previous</a></li>
+                  {% endif %}
+                  <li>
+                          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                  </li>
+                  {% if page_obj.has_next %}
+                  <li><a href="/nineone/list?{% url_replace page=page_obj.next_page_number %}">next</a></li>
+                  {% endif %}
+          </ul>
+  </div>
+{% endif %}
 {% endblock %}

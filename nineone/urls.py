@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from views import VideoDownloadView
 from views import NineoneVideoListView, NineoneVideoDetailView
+from views import clean
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
@@ -26,4 +27,7 @@ urlpatterns = [
         name='nineone_list'),
     url(r'^detail/(?P<pk>[0-9]+)$', NineoneVideoDetailView.as_view(),
         name="nineone_detail"),
+    url(r'^clean/$',
+        login_required(clean),
+        name='clean_nineone'),
 ]

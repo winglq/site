@@ -1,0 +1,6 @@
+{% load bootstrap3 %}
+{% load i18n %}
+
+<div>
+        <span> <a href="{% url 'like' obj.id %}">{% bootstrap_icon "thumbs-up" %} {{ obj.like_count }}</a> <a href="{% url 'dislike' obj.id %}">{% bootstrap_icon "thumbs-down" %} {{ obj.dislike_count }}</a></span>
+</div>

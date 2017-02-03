@@ -3,6 +3,7 @@ from django.db.models.signals import post_delete
 from django.dispatch.dispatcher import receiver
 from django.db import models
 from mysite import settings
+from favor.models import Favorate
 
 import os
 import logging
@@ -23,10 +24,18 @@ class NineoneVideo(models.Model):
     class Meta:
         ordering = ['-ctime']
 
+    _favor = models.ForeignKey("favor.Favorate", null=True)
+    def get_favor(self):
+        if self._favor is None:
+            f = Favorate()
+            f.save()
+            self._favor = f
+            self.save()
+        return self._favor
+    favor = property(get_favor)
+
 @receiver(post_delete, sender=NineoneVideo)
 def delete_video_file(sender, instance, **kwargs):
     f = os.path.join(settings.XSENDFILE_ROOT, instance.filename)
     os.remove(f)
     logger.info("%s deleted", f)
-
-

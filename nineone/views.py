@@ -27,11 +27,18 @@ def require_ticket(f):
 
 class NineoneVideoListView(ListView):
     model = NineoneVideo
+    paginate_by = 20
 
     @require_ticket
     def dispatch(self, request, *args, **kwargs):
         return super(NineoneVideoListView, self).dispatch(
             request, *args, **kwargs)
+    def get_queryset(self):
+        order = self.request.GET.get('orderby')
+        videoes = NineoneVideo.objects.all()
+        if order:
+            videoes = videoes.order_by("-"+order)
+        return videoes
 
 class NineoneVideoDetailView(DetailView):
     model = NineoneVideo
@@ -52,3 +59,20 @@ class VideoDownloadView(TemplateView):
         vinfo = VideoInfo()
         context['object_list'] = vinfo.get_obj_list()
         return self.render_to_response(context)
+
+def get_all_unused_files():
+    all_video = [ x.filename for x in NineoneVideo.objects.all() ]
+    print "all video: %s" % len(all_video)
+    print "all files: %s" % len(os.listdir(settings.XSENDFILE_ROOT))
+    unused_files = [ x for x in os.listdir(settings.XSENDFILE_ROOT) if x not in all_video]
+    print "all unused_files: %s" % len(unused_files)
+    return unused_files
+
+def clean(request):
+    unused_files = get_all_unused_files()
+    print unused_files
+    for f in unused_files:
+        os.remove(os.path.join(settings.XSENDFILE_ROOT, f))
+        print "removed file: %s" % os.path.join(settings.XSENDFILE_ROOT, f)
+
+

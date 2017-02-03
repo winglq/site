@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load favor_tags %}
 
 {% block content %}
 <h1> {{ object.title }} </h1>
+<h3> {% show_favor object.favor %} </h3>
 <div align="center" class="embed-responsive embed-responsive-16by9">
 <video controls class="embed-responsive-item">
         <source src='/protected/{{ object.filename }}' type="video/mp4">

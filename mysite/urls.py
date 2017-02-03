@@ -19,6 +19,8 @@ from django.contrib import admin
 from home.views import index, IndexView
 from django.conf.urls.static import static
 from django.conf import settings
+from favor.views import increase_like_count
+from favor.views import increase_dislike_count
 
 handler404 = 'mysite.views.handler404'
 handler500 = 'mysite.views.handler500'
@@ -26,6 +28,10 @@ handler500 = 'mysite.views.handler500'
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^admin/', admin.site.urls),
+    url(r'^favor/like/(?P<id>[0-9]+)/$', increase_like_count,
+        name='like'),
+    url(r'^favor/dislike/(?P<id>[0-9]+)/$', increase_dislike_count,
+        name='dislike'),
     url(r'^accounts/', include('users.urls')),
     url(r'^register/', include('register.urls')),
     url(r'^summernote/', include('django_summernote.urls')),

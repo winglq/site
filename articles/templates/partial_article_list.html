@@ -1,11 +1,12 @@
 {% load i18n %}
+{% load favor_tags %}
   <table class='table'>
 {% for obj in object_list %}
           <tr>
           <td><a href={% url 'article_detail' obj.id %}> {{ obj.title }} </a></td>
           <td><a href={% url "article_update" obj.id %} >
-    <span class="glyphicon glyphicon-pencil" ></span></td>
-  </a>
+    <span class="glyphicon glyphicon-pencil" ></span></a></td>
+          <td> {% show_favor obj.favor %} </td>
            </tr>
 {% endfor %}
   </table>

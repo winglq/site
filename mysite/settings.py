@@ -55,7 +55,9 @@ INSTALLED_APPS = [
     'register',
     'nineone',
     'ticket',
-    'kombu.transport.django'
+    'kombu.transport.django',
+    'favor',
+    'lib',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -162,7 +164,8 @@ LOGGING = {
     'loggers': {
         'nineone': {
             'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            #'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            'level': "DEBUG"
         },
     },
 }
