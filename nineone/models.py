@@ -4,6 +4,7 @@ from django.dispatch.dispatcher import receiver
 from django.db import models
 from mysite import settings
 from favor.models import Favorate
+from comments.models import Comment
 
 import os
 import logging
@@ -33,6 +34,7 @@ class NineoneVideo(models.Model):
             self.save()
         return self._favor
     favor = property(get_favor)
+    comments = models.ManyToManyField(Comment)
 
 @receiver(post_delete, sender=NineoneVideo)
 def delete_video_file(sender, instance, **kwargs):

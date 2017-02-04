@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
+from comments.forms import CommentForm
 import uuid
 from models import NineoneVideo
 from mysite import settings
@@ -47,6 +49,16 @@ class NineoneVideoDetailView(DetailView):
     def dispatch(self, request, *args, **kwargs):
         return super(NineoneVideoDetailView, self).dispatch(
             request, *args, **kwargs)
+
+    @require_ticket
+    def post(self, request, pk):
+        self.object = get_object_or_404(NineoneVideo, id=pk)
+        comment = CommentForm(request.POST)
+        commit_instance = comment.save()
+        self.object.comments.add(commit_instance)
+        self.object.save()
+        return redirect(reverse('nineone_detail', args=[pk]))
+
 
 class VideoDownloadView(TemplateView):
     template_name = 'nineone/nineone_download_info.html'

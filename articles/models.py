@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 from mysite.models import ModelHelper
 from favor.models import Favorate
+from tags.models import Tag
+from comments.models import Comment
 # Create your models here.
 class Article(models.Model, ModelHelper):
     id = models.AutoField(primary_key=True)
@@ -21,3 +23,5 @@ class Article(models.Model, ModelHelper):
             self.save()
         return self._favor
     favor = property(get_favor)
+    tags = models.ManyToManyField(Tag)
+    comments = models.ManyToManyField(Comment)

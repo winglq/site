@@ -25,7 +25,7 @@ urlpatterns = [
         name="sdownload"),
     url(r'^list/$', NineoneVideoListView.as_view(),
         name='nineone_list'),
-    url(r'^detail/(?P<pk>[0-9]+)$', NineoneVideoDetailView.as_view(),
+    url(r'^detail/(?P<pk>[0-9]+)/$', NineoneVideoDetailView.as_view(),
         name="nineone_detail"),
     url(r'^clean/$',
         login_required(clean),

@@ -10,5 +10,5 @@ class Comment(models.Model):
     content = models.TextField('')
     pub_date = models.DateTimeField('date published', auto_now_add=True,
                                     blank=True)
-    article = models.ForeignKey('articles.Article')
+    #article = models.ForeignKey('articles.Article')
 

@@ -14,7 +14,7 @@ def show_comment_create():
 
 @register.inclusion_tag('partial_comment_list.html')
 def show_comment_list(article):
-    comments = Comment.objects.filter(article=article)
+    comments = article.comments.all()
     return {'object_list': comments}
 
 

@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load bootstrap3 %}
 {% load favor_tags %}
+{% load comment_tags %}
 
 {% block content %}
 <h1> {{ object.title }} </h1>
@@ -13,4 +14,12 @@
 </video>
 </div>
 <p><a href='/protected/{{ object.filename }}'> Download Video </a></p>
+  <hr /> 
+  {% show_comment_list object %}
+  <hr />
+  <div class="well">
+    <h4> {% trans "Leave a comment" %} </h4>
+    {% show_comment_create %}
+  </div>
+
 {% endblock %}

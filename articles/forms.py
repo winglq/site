@@ -5,8 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class ArticleForm(ModelForm):
-    tags = CharField(max_length=100, required=False)
+    stags = CharField(max_length=100, required=False)
     class Meta:
         model = Article
         widgets = {'content': SummernoteWidget()}
-        fields = ('title', 'tags', 'content')
+        fields = ('title', 'stags', 'content')

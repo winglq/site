@@ -33,7 +33,7 @@ class TagWrapper(object):
             tags = Tag.objects.all()
             context['tags'] = \
                 sorted(list(tags)[-10:],
-                       key=lambda x : len(x.articles.all()),
+                       key=lambda x : len(x.article_set.all()),
                        reverse=True)
             return context
 
