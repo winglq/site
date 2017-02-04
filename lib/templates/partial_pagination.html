@@ -1,0 +1,25 @@
+{% load site_tags%}
+
+<div>
+<ul class="pagination">
+        <li class="previous"><a href="/nineone/list?{% url_replace context page=1 %}"> << </a></li>
+        {% if page_obj.has_previous %}
+        <li class="previous"><a href="/nineone/list?{% url_replace context page=page_obj.previous_page_number %}"> < </a></li>
+        {% else %}
+         <li class="disabled"><a href="#"> < </a></li>
+        {% endif %}
+        {% for pg in page_range %}
+          {% if pg == page_obj.number %}
+          <li class="disabled"><a href="#">{{ pg }}</a></li>
+          {% else %}
+          <li><a  href="/nineone/list?{% url_replace context page=pg %}">{{ pg }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="next"><a href="/nineone/list?{% url_replace context page=page_obj.next_page_number %}"> > </a></li>
+        {% else %}
+        <li class="disabled"><a href="#"> > </a></li>
+        {% endif %}
+        <li class="next"><a href="/nineone/list?{% url_replace context page=total_pages %}"> >> </a></li>
+</ul>
+</div>
