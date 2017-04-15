@@ -37,12 +37,22 @@ class nrop19(object):
                 self.ok = True
         return resp(cnt)
 
+    def get_video_url2(self, url):
+        resp = ss.get(url)
+        if resp.ok:
+            soup = BeautifulSoup(resp.content, "html.parser")
+            link = soup.video.source['src']
+            print "video link: %s" % link
+            return link
+        else:
+            raise Exception("get url %s failed" % url)
+        
     def get_video_url(self, url):
         resp = ss.get(url)
         #resp = self.get_resp_by_wget(url)
         if resp.ok:
             n1 = re.search(r'so.addVariable\(\'file\',\'(\d+)\'', resp.content)
-            n2 = re.search(r'so.addVariable\(\'seccode\',\'(.+?)\'', resp.content)
+            n2 = re.search(r'so.addVariable\(\'seccode\'\s*,\s*\'(.+?)\'', resp.content)
             n3 = re.search(r'so.addVariable\(\'max_vid\',\'(\d+)\'', resp.content)
 
             if n1 and n2 and n3:
@@ -134,5 +144,5 @@ if __name__ == "__main__":
     FORMAT = '%(asctime)-15s %(message)s'
     logging.basicConfig(format=FORMAT, level=logging.DEBUG)
     none = nrop19()
-    print none.get_video_url("http://68.235.35.99/view_video.php?viewkey=0bbb1e9ebc00f06ae397&page=1&viewtype=basic&category=tf")
+    print none.get_video_url2("http://68.235.35.99/view_video.php?viewkey=206c6053f3b2ecbde07e&page=1&viewtype=basic&category=tf")
 
