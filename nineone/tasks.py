@@ -86,7 +86,7 @@ def download_and_save():
             continue
         file_name = "%s.mp4" % uuid.uuid4()
         try:
-            video_url = n.get_video_url(info['href'])
+            video_url = n.get_video_url2(info['href'])
         except Exception as e:
             logger.info("Download %s failed. Due to %s", info['href'], str(e))
             break
